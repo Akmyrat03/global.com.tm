@@ -1,0 +1,13 @@
+is_debug: true
+listen:
+  type: port
+  port: 3232
+storage: 
+  host: localhost
+  port: 5432
+  dbname: global
+  username: postgres
+  password: postgres
+  sslmode: disable
+APP:
+  host: localhost:3232
