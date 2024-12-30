@@ -9,6 +9,8 @@ import (
 	"syscall"
 	"time"
 
+	bannerRoutes "github.com/akmyrat/global/internal/banner/routes"
+
 	"github.com/akmyrat/global/pkg/database"
 	"github.com/gin-gonic/gin"
 	_ "github.com/lib/pq"
@@ -37,6 +39,15 @@ func main() {
 	}
 
 	app := gin.Default()
+
+	app.GET("/api/v1/health", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"status": "healthy",
+		})
+	})
+
+	api := app.Group("/api/v1")
+	bannerRoutes.BannerRoutes(api, db)
 
 	server := &http.Server{
 		Addr:    viper.GetString("APP.host"),
